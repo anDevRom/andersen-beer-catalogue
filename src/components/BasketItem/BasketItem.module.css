@@ -1,0 +1,18 @@
+.item {
+    height: 75px;
+    width: 100%;
+    background-color: #de9346;
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    margin-bottom: 10px;
+    font-size: larger;
+}
+
+.img {
+    height: 100%;
+}

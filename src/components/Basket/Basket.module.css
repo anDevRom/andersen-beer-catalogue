@@ -1,0 +1,28 @@
+.container {
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.btn {
+    padding: 5px;
+    color: darkorange;
+    font-weight: bold;
+    background-color: white;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    font-size: larger;
+    transition: color .3s;
+}
+
+.btn:hover {
+    color: white;
+    background-color: darkorange;
+    cursor: pointer;
+}
