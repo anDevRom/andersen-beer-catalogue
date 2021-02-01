@@ -10,15 +10,20 @@ class Card extends React.Component {
         }
 
         this.toggleDescription = this.toggleDescription.bind(this)
+        this.hideDescription = this.hideDescription.bind(this)
     }
 
     toggleDescription() {
         this.setState({descriptionIsVisible: !this.state.descriptionIsVisible})
     }
 
+    hideDescription() {
+        this.setState({descriptionIsVisible: false})
+    }
+
     render() {
         return (
-            <div className={styles.card}>
+            <div className={styles.card} onMouseLeave={this.hideDescription}>
                 <img className={styles.img} src={this.props.card['image_url']} alt=""/>
                 {
                     this.state.descriptionIsVisible ? (
