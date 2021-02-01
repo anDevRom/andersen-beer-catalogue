@@ -39,7 +39,7 @@ class RegistrationForm extends React.Component {
     changeInputHandler(e) {
         this.setState({[e.target.id]: {
                 value: e.target.value,
-                isValid: true
+                isValid: this.state[e.target.id].isValid
             }})
 
     }
@@ -58,6 +58,13 @@ class RegistrationForm extends React.Component {
                                 isValid: false
                             }
                         })
+                    } else {
+                        this.setState({
+                            [input[0]]: {
+                                value: this.state[input[0]].value,
+                                isValid: true
+                            }
+                        })
                     }
                     break
 
@@ -69,6 +76,13 @@ class RegistrationForm extends React.Component {
                             [input[0]]: {
                                 value: this.state[input[0]].value,
                                 isValid: false
+                            }
+                        })
+                    } else {
+                        this.setState({
+                            [input[0]]: {
+                                value: this.state[input[0]].value,
+                                isValid: true
                             }
                         })
                     }
@@ -83,12 +97,22 @@ class RegistrationForm extends React.Component {
                                 isValid: false
                             }
                         })
+                    } else {
+                        this.setState({
+                            [input[0]]: {
+                                value: this.state[input[0]].value,
+                                isValid: true
+                            }
+                        })
                     }
             }
         }
 
-        // eslint-disable-next-line no-unused-expressions
-        Object.values(this.state).every(input => input.isValid === true) ? this.props.closeRegistration() : null
+
+        setTimeout(() => {
+            // eslint-disable-next-line no-unused-expressions
+            Object.values(this.state).every(input => input.isValid === true) ? this.props.closeRegistration() : null
+        }, 0)
     }
 
     render() {
