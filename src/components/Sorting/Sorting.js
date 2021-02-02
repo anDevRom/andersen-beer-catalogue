@@ -1,13 +1,25 @@
 import React from 'react';
-import {useDispatch} from "react-redux";
-import {sorting} from "../../redux/actions";
+import {useDispatch, useSelector} from "react-redux";
 import styles from './Sorting.module.css';
+import {sorting} from "../../store/items/itemsActions";
+import {createMatrix} from "../../utils";
+import {CARDS_ON_PAGE} from "../../constants";
 
 const Sorting = () => {
     const dispatch = useDispatch()
+    const fetchedItems = useSelector(state => state.items.fetchedItems)
+    const itemsBySort = fetchedItems.slice()
 
     function changeHandler(e) {
-        dispatch(sorting(e.target.value))
+        const sortedItems = itemsBySort.sort((a, b) => (
+            e.target.value === 'default' ? a.id - b.id : a[e.target.value] - b[e.target.value]
+        ))
+
+        dispatch(sorting({
+            fetchedItems: sortedItems,
+            pages: createMatrix(sortedItems, CARDS_ON_PAGE),
+            sortingParam: e.target.value
+        }))
     }
 
     return (

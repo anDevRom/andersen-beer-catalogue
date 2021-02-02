@@ -1,14 +1,18 @@
 import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {deleteFromBasket} from "../../redux/actions";
 import styles from './BasketItem.module.css';
+import {deleteFromBasket} from "../../store/basket/basketActions";
 
 const BasketItem = ({card}) => {
     const dispatch = useDispatch()
     const basketItems = useSelector(state => state.basket.basket)
 
     const checkboxHandler = (id) => {
-        dispatch(deleteFromBasket(id))
+        const itemIdx = basketItems.indexOf(id)
+        const newBasket = basketItems.slice()
+        newBasket.splice(itemIdx, 1)
+
+        dispatch(deleteFromBasket(newBasket))
     }
 
     return (

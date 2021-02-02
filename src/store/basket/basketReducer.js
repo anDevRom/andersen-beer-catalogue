@@ -1,4 +1,5 @@
-import {ADD_TO_BASKET, CLOSE_BASKET, DELETE_FROM_BASKET, SHOW_BASKET} from "../types";
+import {ADD_TO_BASKET, CLOSE_BASKET, DELETE_FROM_BASKET, SHOW_BASKET} from "./basketActionTypes";
+
 
 const initialState = {
     basket: [],
@@ -10,16 +11,12 @@ export function basketReducer(state = initialState, action) {
         case ADD_TO_BASKET:
             return {
                 ...state,
-                basket: state.basket.concat([action.payload])
+                basket: action.payload
             }
         case DELETE_FROM_BASKET:
-            const itemIdx = state.basket.indexOf(action.payload)
-            const newBasket = state.basket.slice()
-            newBasket.splice(itemIdx, 1)
-
             return {
                 ...state,
-                basket: newBasket
+                basket: action.payload
             }
         case SHOW_BASKET:
             return {

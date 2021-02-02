@@ -1,12 +1,5 @@
-import {
-    ADD_TO_BASKET,
-    CHANGE_PAGE,
-    CHANGE_SEARCH_QUERY, CLOSE_BASKET,
-    CREATE_PAGES,
-    DELETE_FROM_BASKET,
-    FETCH_ITEMS, HIDE_REGISTRATION, SHOW_BASKET, SHOW_REGISTRATION,
-    SORTING
-} from "./types";
+import {CHANGE_PAGE, CHANGE_SEARCH_QUERY, CREATE_PAGES, FETCH_ITEMS, SORTING} from "./itemsActionTypes";
+import {CARDS_ON_PAGE} from "../../constants";
 
 export function fetchItems() {
     return async dispatch => {
@@ -24,7 +17,7 @@ export function fetchItems() {
         const items = list.slice()
 
         while (items.length) {
-            matrix.push(items.splice(0, 50))
+            matrix.push(items.splice(0, CARDS_ON_PAGE))
         }
 
         //
@@ -46,12 +39,6 @@ export function fetchItems() {
     }
 }
 
-export function createPages() {
-    return {
-        type: CREATE_PAGES
-    }
-}
-
 export function changePage(pageNumber) {
     return {
         type: CHANGE_PAGE,
@@ -59,45 +46,16 @@ export function changePage(pageNumber) {
     }
 }
 
-export function sorting(param) {
+export function sorting(newData) {
     return {
         type: SORTING,
-        payload: param
+        payload: newData
     }
 }
 
-export function changeSearchQuery(text) {
+export function changeSearchQuery(newData) {
     return {
         type: CHANGE_SEARCH_QUERY,
-        payload: text
+        payload: newData
     }
 }
-
-export function addToBasket(itemId) {
-    return {
-        type: ADD_TO_BASKET,
-        payload: itemId
-    }
-}
-
-export function deleteFromBasket(itemId) {
-    return {
-        type: DELETE_FROM_BASKET,
-        payload: itemId
-    }
-}
-
-export function showBasket() {
-    return {
-        type: SHOW_BASKET
-    }
-}
-
-export function closeBasket() {
-    return {
-        type: CLOSE_BASKET
-    }
-}
-
-export const showRegistration = () => ({type: SHOW_REGISTRATION})
-export const hideRegistration = () => ({type: HIDE_REGISTRATION})

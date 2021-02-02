@@ -1,8 +1,9 @@
 import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import Card from "../Card/Card";
-import {addToBasket, deleteFromBasket} from "../../redux/actions";
 import styles from './Page.module.css';
+import {addToBasket, deleteFromBasket} from "../../store/basket/basketActions";
+import {ONE} from "../../constants";
 
 const Page = () => {
     const cards = useSelector(state => state.items.pages[state.items.currentPage - 1])
@@ -11,7 +12,21 @@ const Page = () => {
     const dispatch = useDispatch()
 
     const checkboxHandler = (id, status) => {
-        status ? dispatch(addToBasket(id)) : dispatch(deleteFromBasket(id))
+        const itemIdx = basketItems.indexOf(id)
+        const newBasket = basketItems.slice()
+
+        switch (status) {
+            case true:
+                newBasket.push(id)
+                dispatch(addToBasket(newBasket))
+                break
+
+            case false:
+                newBasket.splice(itemIdx, 1)
+                dispatch(deleteFromBasket(newBasket))
+                break
+            default: return
+        }
     }
 
     return (

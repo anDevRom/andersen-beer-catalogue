@@ -1,4 +1,4 @@
-import {HIDE_REGISTRATION, SHOW_REGISTRATION} from "../types";
+import {HIDE_REGISTRATION, SHOW_REGISTRATION} from "./appActionTypes";
 
 const initialState = {
     registrationIsVisible: false
@@ -13,10 +13,10 @@ export function appReducer(state = initialState, action) {
             }
 
         case HIDE_REGISTRATION:
-                return {
-                    ...state,
-                    registrationIsVisible: false
-                }
+            return {
+                ...state,
+                registrationIsVisible: false
+            }
 
         default: return state
     }

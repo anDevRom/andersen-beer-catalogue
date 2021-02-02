@@ -1,12 +1,13 @@
 import React from 'react';
 import styles from './Main.module.css';
 import {useDispatch, useSelector} from "react-redux";
-import {hideRegistration, showBasket, showRegistration} from "../../redux/actions";
 import Page from "../Page/Page";
 import Pagination from "../Pagination/Pagination";
 import Search from "../Search/Search";
 import Sorting from "../Sorting/Sorting";
 import RegistrationForm from "../RegistrationForm/RegistrationForm";
+import {showBasket} from "../../store/basket/basketActions";
+import {hideRegistration, showRegistration} from "../../store/app/appActions";
 
 const Main = () => {
     const dispatch = useDispatch()

@@ -1,8 +1,8 @@
 import React from 'react';
-import {changePage} from "../../redux/actions";
 import {useDispatch, useSelector} from "react-redux";
 import styles from './Pagination.module.css';
 import PaginationButton from "./PaginationButton/PaginationButton";
+import {changePage} from "../../store/items/itemsActions";
 
 const Pagination = () => {
     const dispatch = useDispatch()
@@ -11,7 +11,21 @@ const Pagination = () => {
     const currentPage = useSelector(state => state.items.currentPage)
 
     function clickHandler(id) {
-        dispatch(changePage(id))
+        let pageNumber
+
+        switch (id) {
+            case 'back':
+                pageNumber = currentPage - 1
+                break
+
+            case 'forward':
+                pageNumber = currentPage + 1
+                break
+
+            default: pageNumber = Number(id)
+        }
+
+        dispatch(changePage(pageNumber))
     }
 
     return (
