@@ -1,5 +1,4 @@
-import {CHANGE_PAGE, CHANGE_SEARCH_QUERY, CREATE_PAGES, FETCH_ITEMS, SORTING} from "./itemsActionTypes";
-import {createMatrix} from "../../utils";
+import {CHANGE_PAGE, CHANGE_SEARCH_QUERY, FETCH_ITEMS, SORTING} from "./itemsActionTypes";
 
 const initialState = {
     fetchedItems: [],

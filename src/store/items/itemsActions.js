@@ -1,38 +1,20 @@
-import {CHANGE_PAGE, CHANGE_SEARCH_QUERY, CREATE_PAGES, FETCH_ITEMS, SORTING} from "./itemsActionTypes";
+import {CHANGE_PAGE, CHANGE_SEARCH_QUERY, FETCH_ITEMS, SORTING} from "./itemsActionTypes";
 import {CARDS_ON_PAGE} from "../../constants";
+import {createItemList, createMatrix, createPaginationList} from "../../utils";
 
 export function fetchItems() {
     return async dispatch => {
-        const list = []
+        const items = await createItemList()
 
-        for (let i = 1; i < 6; i++) {
-            const response = await fetch(`https://api.punkapi.com/v2/beers?page=${i}&per_page=80`)
-            const part = await response.json()
-            list.push(...part)
-        }
+        const pages = createMatrix(items, CARDS_ON_PAGE)
 
-        //
-
-        const matrix = []
-        const items = list.slice()
-
-        while (items.length) {
-            matrix.push(items.splice(0, CARDS_ON_PAGE))
-        }
-
-        //
-
-        const paginationValues = []
-
-        for (let i = 1; i <= matrix.length; i++) {
-            paginationValues.push(i)
-        }
+        const paginationValues = createPaginationList(pages)
 
         dispatch({
             type: FETCH_ITEMS,
             payload: {
-                items: list,
-                pages: matrix,
+                items: items,
+                pages: pages,
                 paginationValues: paginationValues
             }
         })
